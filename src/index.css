@@ -1,0 +1,101 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.container
+{
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(72, 72, 196);
+  padding-top: 30px;
+}
+.weather
+{
+  width: 380px;
+  padding: 30px;
+  border-radius: 10px;
+  margin: 50px auto;
+  background-color: aqua;
+  color: white;
+  text-align: center;
+}
+.search
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.search input
+{
+  border: none;
+  outline: 0;
+  padding: 12px 25px;
+  font-size: 18px;
+  background-color: white;
+  color: black;
+  border-radius: 30px;
+  flex:1;
+  margin-right:12px ; 
+}
+.search button{
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: white;
+  border: none;
+}
+.search button img{
+  width: 25px;
+  height: 25px;
+}
+.winfo .icon
+{
+  margin-top: 20px;
+  width: 170px;
+}
+.winfo h1{
+  font-size: 50px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+.winfo h2{
+  font-size: 40px;
+  font-weight: 400;
+  margin-top: -40px;
+}
+.details
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:0px 20px;
+  margin-top: 50px; 
+}
+.col img{
+  width: 45px;
+  margin-right: 10px;
+}
+.details .col{
+  display: flex;
+  align-items: center;
+  text-align: left;
+} 
+.humidity,.wind
+{
+  font-size: 15px;
+  font-weight:bold;
+}
+.humidity p,.wind p{
+  margin:0px;  
+}
