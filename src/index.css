@@ -99,3 +99,9 @@ code {
 .humidity p,.wind p{
   margin:0px;  
 }
+.error
+{
+  color: red;
+  font-weight: 700;
+  margin-top: 10px;
+}

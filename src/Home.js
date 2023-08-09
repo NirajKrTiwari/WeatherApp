@@ -2,14 +2,21 @@ import React, { useEffect } from 'react'
 import './index.css'
 import axios from 'axios'
 import { useState } from 'react'
+import clear from "../src/Images/clear.png"
+import rain from "../src/Images/rain.png"
+import cloud from "../src/Images/cloud.png"
+import drizzle from "../src/Images/drizzle.png"
+import mist from "../src/Images/mist.png"
+
 export default function Home() {
+  const [error, seterror] = useState("")
   const [data, setData] = useState(
     {
       celcius: 0,
       name: 'City',
       humidity: '0',
       speed: '0',
-      image: '',
+      image: clear,
       weather: '--'
     }
   )
@@ -23,10 +30,36 @@ export default function Home() {
       axios.get(apiUrl)
         .then(res => {
           let imagePath = '';
-          console.log(res.data)
-          setData({ ...data, celcius: res.data.main.temp, name: res.data.name, humidity: res.data.main.humidity, speed: res.data.wind.speed, weather: res.data.weather[0].main })
-        })
-        .catch(err => console.log(err))
+          if (res.data.weather[0].main == "Clouds") {
+            imagePath = cloud
+          }
+          else if (res.data.weather[0].main == "Clear") {
+            imagePath = clear
+          }
+          else if (res.data.weather[0].main == "Rain") {
+            imagePath = rain
+          }
+          else if (res.data.weather[0].main == "Drizzle") {
+            imagePath = drizzle
+          }
+          else if (res.data.weather[0].main == "Mist") {
+            imagePath = mist
+          }
+          else {
+            imagePath = clear
+          }
+          setData({ ...data, celcius: res.data.main.temp, name: res.data.name, humidity: res.data.main.humidity, speed: res.data.wind.speed, weather: res.data.weather[0].main, image: imagePath })
+          seterror("")
+        }
+        )
+        .catch(err =>{
+          if(err.response.status==404)
+          {
+            seterror("Invalid City Name")
+          }
+          console.log(err)
+        }
+          )
     }
   }
   const handleKeyDown = (e) => {
@@ -36,10 +69,35 @@ export default function Home() {
         axios.get(apiUrl)
           .then(res => {
             let imagePath = '';
-            console.log(res.data)
-            setData({ ...data, celcius: res.data.main.temp, name: res.data.name, humidity: res.data.main.humidity, speed: res.data.wind.speed, weather: res.data.weather[0].main })
+            if (res.data.weather[0].main == "Clouds") {
+              imagePath = cloud
+            }
+            else if (res.data.weather[0].main == "Clear") {
+              imagePath = clear
+            }
+            else if (res.data.weather[0].main == "Rain") {
+              imagePath = rain
+            }
+            else if (res.data.weather[0].main == "Drizzle") {
+              imagePath = drizzle
+            }
+            else if (res.data.weather[0].main == "Mist") {
+              imagePath = mist
+            }
+            else {
+              imagePath = clear
+            }
+            seterror("")
+            setData({ ...data, celcius: res.data.main.temp, name: res.data.name, humidity: res.data.main.humidity, speed: res.data.wind.speed, weather: res.data.weather[0].main,image:imagePath })
           })
-          .catch(err => console.log(err))
+          .catch(err =>{
+            if(err.response.status==404)
+            {
+              seterror("Invalid City Name")
+            }
+            console.log(err)
+          }
+            )
         e.preventDefault();
         e.target.blur();
       }
@@ -54,9 +112,12 @@ export default function Home() {
             <img src={require("../src/Images/search.png")} />
           </button>
         </div>
+        <div className='error'>
+            {error}
+        </div>
         <div className='winfo'>
-          <img className="icon" src={require("../src/Images/cloud.png")} alt="" />
-          <h3>{data.weather}</h3>
+          <img className="icon" src={data.image} alt="Weather" />
+          {/* <h3>{data.weather}</h3> */}
           <h1>{Math.round(data.celcius)}°c</h1>
           <h2>{data.name}</h2>
         </div>
